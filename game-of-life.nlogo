@@ -26,6 +26,14 @@ to addSlider
   ask patch 1 3 [set pcolor white]
   reset-ticks
 end
+
+to addGun
+  ca
+  ask patch -10 0 [set pcolor white]
+  ask patch -9 0 [set pcolor white]
+  ask patch -10 1 [set pcolor white]
+  ask patch -9 1 [set pcolor white]
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 425
@@ -87,10 +95,10 @@ NIL
 1
 
 BUTTON
-88
-278
-151
-311
+90
+282
+153
+315
 NIL
 go
 T
