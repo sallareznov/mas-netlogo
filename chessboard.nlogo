@@ -1,7 +1,10 @@
+
+
 to setup
   ca
   ask patches with [(pxcor mod 2) != (pycor mod 2)] [set pcolor yellow]
-  crt 10
+  crt nbTurtles
+  ask turtles [setxy random-xcor random-ycor]
 end
 
 to moveOneTurtle
@@ -99,6 +102,21 @@ NIL
 NIL
 NIL
 1
+
+SLIDER
+140
+409
+312
+442
+nbTurtles
+nbTurtles
+10
+100
+84
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

@@ -35,6 +35,7 @@ to setup
   crt 22
   ask n-of 11 turtles [set shape "person" set color blue set size 4]
   ask turtles with [color != blue] [set shape "person" set color red set size 4]
+  ask turtles [setxy random-xcor random-ycor]
   reset-ticks
 end
 
@@ -81,10 +82,10 @@ ticks
 30.0
 
 BUTTON
-14
-45
-87
-78
+63
+70
+136
+103
 NIL
 setup
 NIL
