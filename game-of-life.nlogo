@@ -3,6 +3,7 @@ patches-own[next-state]
 to setup
   ca
   ask patches with [random 100 < alive-cells-density] [set pcolor white]
+  reset-ticks
 end
 
 to evolve
@@ -13,6 +14,7 @@ end
 to go
   ask patches [evolve]
   ask patches [set pcolor next-state]
+  tick
 end
 
 to addSlider
@@ -22,13 +24,14 @@ to addSlider
   ask patch 1 1 [set pcolor white]
   ask patch 2 2 [set pcolor white]
   ask patch 1 3 [set pcolor white]
+  reset-ticks
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-348
-61
-762
-496
+425
+78
+839
+513
 50
 50
 4.0
@@ -60,7 +63,7 @@ alive-cells-density
 alive-cells-density
 0
 100
-30
+50
 1
 1
 NIL
@@ -116,6 +119,25 @@ NIL
 NIL
 NIL
 1
+
+PLOT
+1014
+58
+1647
+580
+Time-dependent number of alive and dead cells
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"dead-cells" 1.0 0 -2674135 true "" "plot count patches with [pcolor = black]"
+"alive-cells" 1.0 0 -13840069 true "" "plot count patches with [pcolor = white]"
 
 @#$#@#$#@
 ## WHAT IS IT?
