@@ -1,2 +1,2 @@
-# collective-ia
-Collective intelligence simulation with NetLogo
+# mas-netlogo
+Modelizing multi-agents systems and simulating interactions with NetLogo
