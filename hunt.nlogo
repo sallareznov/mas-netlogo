@@ -1,16 +1,17 @@
-breed [tunas tuna]
-breed [sharks shark]
+breed [preys prey]
+breed [predators predator]
+breed [obstacles obstacle]
 
-tunas-own [breed-limit breed-counter]
-sharks-own [breed-limit breed-counter starve starve-counter]
+preys-own [direction]
 
 to setup
   ca
-  create-tunas nb-tunas
-  create-sharks nb-sharks
-  ask patches [set pcolor white]
-  ask tunas [set breed-limit tunas-breed set breed-counter 0 setxy random-pxcor random-pycor set shape "fish" set color pink]
-  ask sharks [set breed-limit sharks-breed set breed-counter 0 set starve sharks-starve set starve-counter 0 setxy random-pxcor random-pycor set shape "fish" set color blue]
+  create-preys 1
+  create-predators nb-predators
+  create-obstacles nb-obstacles
+  ask preys [setxy random-pxcor random-pycor set shape "circle" set color blue]
+  ask predators [setxy random-pxcor random-pycor set shape "circle" set color red]
+  ask obstacles [setxy random-pxcor random-pycor set shape "square" set color brown]
   reset-ticks
 end
 
@@ -20,49 +21,42 @@ to go
 end
 
 to decide
-  ifelse is-tuna? self [tuna-decide] [shark-decide]
+  ifelse is-prey? self
+  [fd 1]
+  []
 end
 
-to tuna-decide
-  let free-neighbor-patch one-of neighbors with [not any? turtles-here]
-  ifelse (free-neighbor-patch != nobody)
-    [move-and-aim-to-reproduce free-neighbor-patch]
-    [set breed-counter (breed-counter + 1)]
+to move-up
+  ask preys
+  [set heading 0
+  fd 1]
+ end
+
+to move-down
+  ask preys
+  [set heading 180
+  fd 1]
 end
 
-to shark-decide
-  ifelse starve-counter = starve
-    [die]
-    [ifelse any? neighbors with [any? tunas-here]
-      [let tuna-to-be-eaten-patch one-of neighbors with [any? tunas-here]
-          let tuna-to-be-eaten one-of tunas-on tuna-to-be-eaten-patch
-          ask tuna-to-be-eaten [die]
-          move-and-aim-to-reproduce tuna-to-be-eaten-patch
-      ]
-      [set starve-counter (starve-counter + 1)
-        let free-neighbor-patch one-of neighbors with [not any? turtles-here]
-        ifelse (free-neighbor-patch != nobody)
-        [move-and-aim-to-reproduce free-neighbor-patch]
-        [set breed-counter (breed-counter + 1)]
-      ]
-    ]
+to move-right
+  ask preys
+  [set heading 90
+  fd 1]
+
 end
 
-to move-and-aim-to-reproduce [next-patch]
-  ifelse (breed-counter = breed-limit)
-    [ifelse is-tuna? self
-      [hatch-tunas 1 set breed-limit tunas-breed set breed-counter 0]
-      [hatch-sharks 1 set breed-limit sharks-breed set starve sharks-starve set breed-counter 0 set starve-counter 0]
-    ]
-  [set breed-counter (breed-counter + 1)]
-  move-to next-patch
+to move-left
+  ask preys
+  [set heading 270
+  fd 1]
 end
+
 @#$#@#$#@
 GRAPHICS-WINDOW
-330
-13
-769
-473
+498
+27
+937
+487
 16
 16
 13.0
@@ -79,47 +73,47 @@ GRAPHICS-WINDOW
 16
 -16
 16
-1
-1
+0
+0
 1
 ticks
 30.0
 
 SLIDER
-107
-196
-279
-229
-nb-tunas
-nb-tunas
-5
-1000
-885
-5
+119
+93
+291
+126
+nb-predators
+nb-predators
+0
+10
+2
+1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-106
-252
-278
-285
-nb-sharks
-nb-sharks
-5
-500
+119
+35
+291
+68
+nb-obstacles
+nb-obstacles
+0
+100
 50
-5
+1
 1
 NIL
 HORIZONTAL
 
 BUTTON
-153
-24
-216
-57
+86
+178
+159
+211
 NIL
 setup
 NIL
@@ -133,73 +127,79 @@ NIL
 1
 
 BUTTON
-154
-140
-217
-173
+165
+243
+258
+276
 NIL
-go
-T
+move-up\n
+NIL
 1
 T
 OBSERVER
 NIL
+8
 NIL
 NIL
-NIL
 1
-
-SLIDER
-109
-307
-281
-340
-tunas-breed
-tunas-breed
-0
-10
-2
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-110
-359
-282
-392
-sharks-breed
-sharks-breed
-0
-10
-9
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-108
-418
-280
-451
-sharks-starve
-sharks-starve
-0
-10
-2
-1
-1
-NIL
-HORIZONTAL
 
 BUTTON
-143
-83
-239
-116
-run-once
+61
+295
+158
+328
+NIL
+move-left\n
+NIL
+1
+T
+OBSERVER
+NIL
+4
+NIL
+NIL
+1
+
+BUTTON
+262
+294
+370
+327
+NIL
+move-right
+NIL
+1
+T
+OBSERVER
+NIL
+6
+NIL
+NIL
+1
+
+BUTTON
+154
+365
+266
+398
+NIL
+move-down
+NIL
+1
+T
+OBSERVER
+NIL
+2
+NIL
+NIL
+1
+
+BUTTON
+299
+177
+362
+210
+NIL
 go
 NIL
 1
@@ -210,25 +210,6 @@ NIL
 NIL
 NIL
 1
-
-PLOT
-819
-67
-1311
-390
-Time-dependent number of fishes
-NIL
-NIL
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -2064490 true "" "plot count tunas"
-"pen-1" 1.0 0 -13345367 true "" "plot count sharks"
 
 @#$#@#$#@
 ## WHAT IS IT?
