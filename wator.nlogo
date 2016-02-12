@@ -50,7 +50,7 @@ end
 
 to move-and-aim-to-reproduce [next-patch]
   ifelse (breedCounter = breedLimit)
-    [ifelse is-tuna? self [hatch-tunas 1] [hatch-sharks 1]
+    [ifelse is-tuna? self [hatch-tunas 1 set breedCounter 0] [hatch-sharks 1 set breedCounter 0 set starveCounter 0]
       move-to next-patch set breedCounter 0
     ]
   [set breedCounter (breedCounter + 1)]
