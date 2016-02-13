@@ -26,10 +26,10 @@ to go
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-835
-91
-1274
-551
+277
+21
+716
+481
 16
 16
 13.0
@@ -53,11 +53,11 @@ ticks
 30.0
 
 PLOT
-13
-267
-522
-630
-foodQuantity
+806
+62
+1315
+425
+Time-dependent quantity of food
 Number of ticks
 Quantity of food
 0.0
@@ -71,10 +71,10 @@ PENS
 "default" 1.0 0 -13840069 true "" "plot sum [food] of patches"
 
 BUTTON
-178
-32
-251
-65
+98
+194
+171
+227
 setup
 setup
 NIL
@@ -88,10 +88,10 @@ NIL
 1
 
 BUTTON
-177
-136
-240
-169
+104
+249
+167
+282
 NIL
 go\n
 T

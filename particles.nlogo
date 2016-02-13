@@ -20,16 +20,15 @@ to change-direction
   lt random 30
   rt random 30
 end
-
 @#$#@#$#@
 GRAPHICS-WINDOW
-473
-50
-1016
-614
+460
+13
+907
+481
 20
 20
-13.0
+10.66
 1
 10
 1
@@ -50,25 +49,25 @@ ticks
 30.0
 
 SLIDER
-135
-227
-307
-260
+138
+162
+310
+195
 nbParticles
 nbParticles
 5
 500
-100
+200
 5
 1
 NIL
 HORIZONTAL
 
 BUTTON
-185
-303
-248
-336
+188
+238
+251
+271
 NIL
 setup
 NIL
@@ -82,10 +81,10 @@ NIL
 1
 
 BUTTON
-185
-373
-248
-406
+188
+308
+251
+341
 NIL
 go
 T

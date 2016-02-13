@@ -36,10 +36,10 @@ to addGun
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-425
-78
-839
-513
+289
+27
+703
+462
 50
 50
 4.0
@@ -63,25 +63,25 @@ ticks
 30.0
 
 SLIDER
-35
-134
-217
-167
+57
+163
+239
+196
 alive-cells-density
 alive-cells-density
 0
 100
-50
+60
 1
 1
 NIL
 HORIZONTAL
 
 BUTTON
-85
-191
-158
-224
+107
+220
+180
+253
 NIL
 setup
 NIL
@@ -95,10 +95,10 @@ NIL
 1
 
 BUTTON
-90
-282
-153
-315
+113
+277
+176
+310
 NIL
 go
 T
@@ -111,28 +111,11 @@ NIL
 NIL
 1
 
-BUTTON
-68
-234
-168
-267
-NIL
-addSlider
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
 PLOT
-1014
-58
-1647
-580
+774
+32
+1268
+461
 Time-dependent number of alive and dead cells
 NIL
 NIL
@@ -141,7 +124,7 @@ NIL
 0.0
 10.0
 true
-false
+true
 "" ""
 PENS
 "dead-cells" 1.0 0 -2674135 true "" "plot count patches with [pcolor = black]"

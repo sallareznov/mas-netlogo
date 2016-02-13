@@ -1,4 +1,5 @@
-turtles-own[nb-boys nb-girls has-a-boy]
+globals [nb-boys nb-girls]
+turtles-own [has-a-boy]
 
 to setup
   ca
@@ -21,10 +22,10 @@ to go
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-334
-81
-773
-541
+243
+17
+682
+477
 16
 16
 13.0
@@ -41,17 +42,17 @@ GRAPHICS-WINDOW
 16
 -16
 16
-0
-0
+1
+1
 1
 ticks
 30.0
 
 PLOT
-934
-64
-1582
-561
+751
+37
+1292
+459
 Time-dependent number of boys and girls
 Number of ticks
 Number of individuals
@@ -60,17 +61,17 @@ Number of individuals
 0.0
 10.0
 true
-false
+true
 "" ""
 PENS
 "number of boys" 1.0 0 -13791810 true "" "plot sum [nb-boys] of turtles"
 "number of girls" 1.0 0 -2674135 true "" "plot sum [nb-girls] of turtles"
 
 BUTTON
-97
-140
-170
-173
+74
+70
+147
+103
 NIL
 setup
 NIL
@@ -84,13 +85,52 @@ NIL
 1
 
 BUTTON
-101
-212
-164
-245
+81
+120
+144
+153
 NIL
 go
 T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+MONITOR
+52
+302
+170
+347
+Number of boys
+nb-boys
+17
+1
+11
+
+MONITOR
+53
+232
+169
+277
+Number of girls
+nb-girls
+17
+1
+11
+
+BUTTON
+65
+168
+158
+201
+runOnce
+go
+NIL
 1
 T
 OBSERVER

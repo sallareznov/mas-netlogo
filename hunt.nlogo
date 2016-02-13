@@ -2,61 +2,82 @@ breed [preys prey]
 breed [predators predator]
 breed [obstacles obstacle]
 
-preys-own [direction]
+globals [game-over]
+
+patches-own [dijkstra-distance]
 
 to setup
   ca
   create-preys 1
   create-predators nb-predators
   create-obstacles nb-obstacles
-  ask preys [setxy random-pxcor random-pycor set shape "circle" set color blue]
+  ask preys [setxy random-pxcor random-pycor set shape "circle" set color blue move-right]
   ask predators [setxy random-pxcor random-pycor set shape "circle" set color red]
   ask obstacles [setxy random-pxcor random-pycor set shape "square" set color brown]
+  set game-over false
   reset-ticks
 end
 
 to go
+  update-dijkstra-distances
+  if (display-dijkstra-distances) [ask patches [set plabel dijkstra-distance]]
   ask turtles [decide]
+  if (game-over) [stop]
   tick
 end
 
 to decide
   ifelse is-prey? self
-  [fd 1]
-  []
+  [if (not any? [turtles-here] of patch-ahead 1) [fd 1]]
+  [if is-predator? self [
+      show any? neighbors with [is-prey? turtles-here]
+      ifelse (any? neighbors with [any? preys-here]) [set game-over true] [move-to min-one-of neighbors with [not any? turtles-here] [dijkstra-distance]]
+    ]
+  ]
+end
+
+to update-dijkstra-distances
+  ask patches [set dijkstra-distance -1]
+  let queue []
+  ask one-of preys [ask patch-here [set dijkstra-distance 0 set queue lput self queue]]
+  while [not empty? queue]
+  [let head first queue
+    set queue but-first queue
+    ask head [ask neighbors with [dijkstra-distance = -1 or (dijkstra-distance > ([dijkstra-distance] of head) + 1)]
+      [set dijkstra-distance (([dijkstra-distance] of head) + 1) set queue lput self queue]]
+    ]
 end
 
 to move-up
   ask preys
-  [set heading 0
-  fd 1]
- end
+  [set heading 0]
+    ;;if (not any? [turtles-here] of patch-ahead 1) [fd 1]]
+end
 
 to move-down
   ask preys
-  [set heading 180
-  fd 1]
+  [set heading 180]
+  ;;if (not any? [turtles-here] of patch-ahead 1) [fd 1]]
 end
 
 to move-right
   ask preys
-  [set heading 90
-  fd 1]
+  [set heading 90]
+  ;;if (not any? [turtles-here] of patch-ahead 1) [fd 1]]
 
 end
 
 to move-left
   ask preys
-  [set heading 270
-  fd 1]
+  [set heading 270]
+  ;;if (not any? [turtles-here] of patch-ahead 1) [fd 1]]
 end
-
 @#$#@#$#@
 GRAPHICS-WINDOW
-498
-27
-937
-487
+537
+16
+976
+476
 16
 16
 13.0
@@ -73,16 +94,16 @@ GRAPHICS-WINDOW
 16
 -16
 16
-0
-0
+1
+1
 1
 ticks
 30.0
 
 SLIDER
-119
+37
 93
-291
+209
 126
 nb-predators
 nb-predators
@@ -95,25 +116,25 @@ NIL
 HORIZONTAL
 
 SLIDER
-119
-35
-291
-68
+38
+31
+210
+64
 nb-obstacles
 nb-obstacles
 0
 100
-50
+40
 1
 1
 NIL
 HORIZONTAL
 
 BUTTON
-86
-178
-159
-211
+68
+179
+141
+212
 NIL
 setup
 NIL
@@ -196,12 +217,12 @@ NIL
 
 BUTTON
 299
-177
+178
 362
-210
+211
 NIL
 go
-NIL
+T
 1
 T
 OBSERVER
@@ -210,6 +231,17 @@ NIL
 NIL
 NIL
 1
+
+SWITCH
+242
+61
+481
+94
+display-dijkstra-distances
+display-dijkstra-distances
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
