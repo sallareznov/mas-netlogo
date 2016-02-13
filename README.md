@@ -23,4 +23,4 @@ Modelizing multi-agents systems and simulating interactions with NetLogo
 
 ## Particles
 
-![particles-interface](interfaces/game-of-life_interface.png)
+![particles-interface](interfaces/particles_interface.png)

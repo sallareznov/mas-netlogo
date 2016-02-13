@@ -3,7 +3,7 @@ turtles-own [has-a-boy]
 
 to setup
   ca
-  crt 100
+  crt population
   ask turtles [set nb-girls 0]
   ask turtles [set nb-boys 0]
   ask turtles [setxy random-xcor random-ycor]
@@ -68,10 +68,10 @@ PENS
 "number of girls" 1.0 0 -2674135 true "" "plot sum [nb-girls] of turtles"
 
 BUTTON
-74
-70
-147
-103
+76
+137
+149
+170
 NIL
 setup
 NIL
@@ -85,10 +85,10 @@ NIL
 1
 
 BUTTON
-81
-120
-144
-153
+83
+187
+146
+220
 NIL
 go
 T
@@ -102,10 +102,10 @@ NIL
 1
 
 MONITOR
-52
-302
-170
-347
+54
+369
+172
+414
 Number of boys
 nb-boys
 17
@@ -113,10 +113,10 @@ nb-boys
 11
 
 MONITOR
-53
-232
-169
-277
+55
+299
+171
+344
 Number of girls
 nb-girls
 17
@@ -124,10 +124,10 @@ nb-girls
 11
 
 BUTTON
-65
-168
-158
-201
+67
+235
+160
+268
 runOnce
 go
 NIL
@@ -139,6 +139,21 @@ NIL
 NIL
 NIL
 1
+
+SLIDER
+41
+83
+213
+116
+population
+population
+0
+1000
+300
+5
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
