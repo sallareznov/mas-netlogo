@@ -22,19 +22,21 @@ to go
   update-dijkstra-distances
   if (display-dijkstra-distances) [ask patches [set plabel dijkstra-distance]]
   ask turtles [decide]
+  update-dijkstra-distances
+  if (display-dijkstra-distances) [ask patches [set plabel dijkstra-distance]]
+  display
   if game-over [handle-game-over]
   tick
 end
 
 to handle-game-over
-  if user-yes-or-no? "GAME OVER! Do you want to restart?" [setup go]
+  if user-yes-or-no? "GAME OVER! You have been caught. Do you want to restart?" [setup go]
 end
 
 to decide
   ifelse is-prey? self
   [if (not any? [turtles-here] of patch-ahead 1) [fd 1]]
   [if is-predator? self [
-      show any? neighbors with [is-prey? turtles-here]
       ifelse (any? neighbors with [any? preys-here]) [set game-over true] [move-to min-one-of neighbors with [not any? turtles-here] [dijkstra-distance]]
     ]
   ]
@@ -237,6 +239,23 @@ display-dijkstra-distances
 0
 1
 -1000
+
+BUTTON
+179
+176
+272
+209
+runOnce
+go
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
